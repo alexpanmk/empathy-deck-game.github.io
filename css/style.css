@@ -1,0 +1,73 @@
+html {
+    background-color: white;
+}
+
+body {
+
+    color: white;
+
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100vh;
+}
+
+#main {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 50px 1fr 40px;
+    grid-gap: 40px;
+
+    min-height: 720px;
+    min-width: 1280px;
+    background-color: #F5F5F5;
+    /* border-radius: 20px; */
+
+}
+
+
+.game-title {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+    height: 50px;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-title > h1{
+    font-size: 40px;
+    color: rgb(87, 87, 87);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+
+.game-viewport {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    /* height: 500px; */
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-viewport > canvas {
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+write a .status-bar that takes up the third row and all 3 columns
+
+.status-bar {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+    height: 40px;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
