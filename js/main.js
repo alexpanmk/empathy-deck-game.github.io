@@ -4,8 +4,8 @@
  /*----- state variables -----*/
 const state = {
     player = new playerClass(),
-    cardDeck = new cardClass
-    
+    activeLead = [],
+    trustBar = 0,
 }
 
  /*----- cached elements  -----*/
@@ -40,9 +40,6 @@ function clickFunctions(id){
 
  //timer for game progression
  
-
-
-
  /*----- functions -----*/
 
  //Render Functions
