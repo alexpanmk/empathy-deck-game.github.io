@@ -1,20 +1,37 @@
+import deckData from '../assets/gamedata/gamedata.js'
+
 /*----- constants -----*/
-//read in game data as constant
+const demoCard = deckData[0]; 
+const demoCardDialogue = deckData.cardDeck[0].dialogChoices.A;
+
+
 
  /*----- state variables -----*/
+// const state = {
+//     //player = new playerClass(),
+//     activeLead = [],
+//     trustBar = 0,
+// }
+
 const state = {
-    player = new playerClass(),
-    activeLead = [],
-    trustBar = 0,
+    // player: new playerClass(),
+    deck: [],
+    displayCard: [],
+    currentDialogue: [],
+    turnCount: 0,
+    maxTurn: 10,
 }
 
  /*----- cached elements  -----*/
 const selectors = {
-    mainDiv: document.querySelector('main') ,
-    activeCards: document.querySelector('active-cards'),
-    cardTray: document.getElementById('card-tray') ,
-    playerInteraction: document.getElementById('card-tray'),
-}
+    mainDiv: document.getElementById('#main') ,
+    fullCard: document.querySelector('.full-card'),
+    activeCards: document.querySelector('.active-cards'),
+    cardTray: document.querySelector('.card-tray') ,
+    playerInteraction: document.querySelector('.player-interaction'),
+};
+
+console.log(selectors);
 
 
  /*----- event listeners & functions-----*/
@@ -28,8 +45,8 @@ const selectors = {
         
  }
 
-
 function clickFunctions(id){
+    console.assert,lkog
 
  }
 
@@ -55,6 +72,21 @@ function render() {
 
 }
 
+function clearDemoElements(){
+
+    let elements = [
+        ...Array.from(selectors.fullCard.children),
+        ...Array.from(selectors.playerInteraction.children)
+    ];
+
+    elements.forEach(element => {
+        element.innerText="";
+    });
+
+}
+
+
+
 function renderDeck(){
     //render deck to represent fixed number of cards overlapping each other
 
@@ -76,14 +108,21 @@ function renderFullCard(){
     //Render Character Interest Level
 }
 
-function initBoard(){
-    //To set board's initial state
-    //To set initial game greetings, tutorial and dialogue to player in interaction box
+function renderStatusBar(){
+    //Render Player Empathy Level
 
+    //Render Converted Clients + total value
 
+    //Render Timer 
 }
 
+
  //Business Logic
+
+ function initBoard(){
+    //To set board's initial state
+    //To set initial game greetings, tutorial and dialogue to player in interaction box
+ }
 
  function initGame(){
     //init player state
@@ -112,6 +151,8 @@ function checkEmpathyBar(){
 
  function readInGameData() {
     //To read in assets/gamedata/gamedata.json
+   
+
 
  }
 
@@ -130,15 +171,29 @@ function gameTutorial(step){
  }
 
 
-function renderStatusBar(){
-    //Render Player Empathy Level
 
-    //Render Converted Clients + total value
 
-    //Render Timer 
+
+
+
+function advanceTurn(){
+    //For Demo
+
 }
 
 
+function runDemo(){
+    //load demo card
+
+}
+
+
+function initialise() {
+    // console.log(deckData);
+    clearDemoElements();
+
+    runDemo();
+};
 
 
 

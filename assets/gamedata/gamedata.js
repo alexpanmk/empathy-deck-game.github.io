@@ -11,6 +11,7 @@
 //   - C: [Array of 10 opening dialogues from lead and choices for each dialogue]
 //   - D: [Array of 10 opening dialogues from lead and choices for each dialogue]
 
+const jsonData = 
 {
   "cardDeck": [
     {
@@ -62,4 +63,6 @@
   ]
 }
 
+
+export default jsonData;
   
