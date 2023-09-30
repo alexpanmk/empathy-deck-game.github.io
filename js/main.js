@@ -24,7 +24,7 @@ const state = {
 
  /*----- cached elements  -----*/
 const selectors = {
-    mainDiv: document.getElementById('#main') ,
+    mainDiv: document.getElementById('main'),
     fullCard: document.querySelector('.full-card'),
     activeCards: document.querySelector('.active-cards'),
     cardTray: document.querySelector('.card-tray') ,
@@ -40,13 +40,14 @@ console.log(selectors);
  //(full card should show current lead focus by default)
  function addEventListeners(){
     selectors.mainDiv.addEventListener('click', evt => {clickFunctions(evt.target.id)});
+    // selectors.mainDiv.addEventListener('click', evt => {clickFunctions(evt.target.id)});
     // selectors.mainDiv.addEventListener('mouseover', evt => {hoverFunctions(evt.target.id, 'mouseover')});
     // selectors.mainDiv.addEventListener('mouseout', evt => {hoverFunctions(evt.target.id, 'mouseout')});
         
  }
 
 function clickFunctions(id){
-    console.assert,lkog
+    console.log(id);
 
  }
 
@@ -74,14 +75,14 @@ function render() {
 
 function clearDemoElements(){
 
-    let elements = [
-        ...Array.from(selectors.fullCard.children),
-        ...Array.from(selectors.playerInteraction.children)
-    ];
+    // let elements = [
+    //     ...Array.from(selectors.fullCard.children),
+    //     ...Array.from(selectors.playerInteraction.children)
+    // ];
 
-    elements.forEach(element => {
-        element.innerText="";
-    });
+    // elements.forEach(element => {
+    //     element.innerText="";
+    // });
 
 }
 
@@ -126,7 +127,6 @@ function renderStatusBar(){
 
  function initGame(){
     //init player state
-    //init deck state with readInGameData()
 
  }
 
@@ -182,6 +182,11 @@ function advanceTurn(){
 }
 
 
+function loadDemoCard(){
+    
+}
+
+
 function runDemo(){
     //load demo card
 
@@ -191,6 +196,7 @@ function runDemo(){
 function initialise() {
     // console.log(deckData);
     clearDemoElements();
+    addEventListeners();
 
     runDemo();
 };
