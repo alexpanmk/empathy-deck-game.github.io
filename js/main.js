@@ -3,20 +3,45 @@
 
  /*----- state variables -----*/
 const state = {
-
+    player = new playerClass(),
+    cardDeck = new cardClass
+    
 }
 
  /*----- cached elements  -----*/
 const selectors = {
-    
+    mainDiv: document.querySelector('main') ,
+    activeCards: document.querySelector('active-cards'),
+    cardTray: document.getElementById('card-tray') ,
+    playerInteraction: document.getElementById('card-tray'),
 }
 
- /*----- event listeners -----*/
+
+ /*----- event listeners & functions-----*/
  
- //hover on card tray area to review full card 
+ //hover on card tray area to review full card
+ //(full card should show current lead focus by default)
+ function addEventListeners(){
+    selectors.mainDiv.addEventListener('click', evt => {clickFunctions(evt.target.id)});
+    // selectors.mainDiv.addEventListener('mouseover', evt => {hoverFunctions(evt.target.id, 'mouseover')});
+    // selectors.mainDiv.addEventListener('mouseout', evt => {hoverFunctions(evt.target.id, 'mouseout')});
+        
+ }
+
+
+function clickFunctions(id){
+
+ }
+
+//  function hoverFunctions(id, type){
+    
+//  }
+
 
  //timer for game progression
  
+
+
 
  /*----- functions -----*/
 
@@ -29,6 +54,7 @@ function render() {
     renderFullCard();
     renderActiveCards();
     renderPlayerInteraction();
+    renderStatusBar();
 
 }
 
@@ -44,6 +70,13 @@ function renderProspects(){
 function renderClients(){
     //render converted clients, to declare in state
 
+}
+
+function renderFullCard(){
+    //Render Character name + Status ( A-D / Client )
+    //Render Character Portrait
+    //Render Character Persona
+    //Render Character Interest Level
 }
 
 function initBoard(){
@@ -100,7 +133,15 @@ function gameTutorial(step){
  }
 
 
- //
+function renderStatusBar(){
+    //Render Player Empathy Level
+
+    //Render Converted Clients + total value
+
+    //Render Timer 
+}
+
+
 
 
 
