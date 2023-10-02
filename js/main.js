@@ -4,7 +4,7 @@ import deckData from '../assets/gamedata/gamedata.js'
 const demoCard = deckData[0]; 
 const demoCardDialogue = deckData.cardDeck[0].dialogChoices.A;
 
-
+// console.log(deckData);
 
  /*----- state variables -----*/
 // const state = {
@@ -16,23 +16,32 @@ const demoCardDialogue = deckData.cardDeck[0].dialogChoices.A;
 const state = {
     // player: new playerClass(),
     deck: [],
-    displayCard: [],
+    displayCard: [], //displayCard can show other cards being hovered over
+    drawnCard: [],
+    trustBarPlaceholder: 0,
+    currentCardTurn: [], //To separate from main turn count due to nature of game mechanics
     currentDialogue: [],
     turnCount: 0,
-    maxTurn: 10,
+    maxTurn: 11,
 }
 
  /*----- cached elements  -----*/
 const selectors = {
     mainDiv: document.getElementById('main'),
-    fullCard: document.querySelector('.full-card'),
+
+    //full-card selectors
+    fullCard: {
+        name: document.querySelector('.full-card .name h1'),
+        img: document.querySelector('.full-card .profile-row img'),
+        writeup: document.querySelector('.full-card .write-up p'),
+        progressBar: document.querySelector('.progress-bar'),
+    },
+
     activeCards: document.querySelector('.active-cards'),
     cardTray: document.querySelector('.card-tray') ,
     playerInteraction: document.querySelector('.player-interaction'),
+
 };
-
-console.log(selectors);
-
 
  /*----- event listeners & functions-----*/
  
@@ -47,6 +56,7 @@ console.log(selectors);
  }
 
 function clickFunctions(id){
+
     console.log(id);
 
  }
@@ -55,10 +65,9 @@ function clickFunctions(id){
     
 //  }
 
-
- //timer for game progression
+//timer for game progression
  
- /*----- functions -----*/
+/*----- functions -----*/
 
  //Render Functions
 function render() {
@@ -67,14 +76,15 @@ function render() {
     renderClients();
 
     renderFullCard();
-    renderActiveCards();
+    // renderActiveCards();
     renderPlayerInteraction();
-    renderStatusBar();
+    //renderStatusBar();
 
 }
 
 function clearDemoElements(){
 
+    // // Collect the required elements into variable for iteration
     // let elements = [
     //     ...Array.from(selectors.fullCard.children),
     //     ...Array.from(selectors.playerInteraction.children)
@@ -85,8 +95,6 @@ function clearDemoElements(){
     // });
 
 }
-
-
 
 function renderDeck(){
     //render deck to represent fixed number of cards overlapping each other
@@ -103,10 +111,26 @@ function renderClients(){
 }
 
 function renderFullCard(){
+
+    
+    //render state.drawnCard into elements
+    selectors.fullCard.name.innerText = state.drawnCard.leadName;
+    selectors.fullCard.img.src = state.drawnCard.profileImage;
+    selectors.fullCard.writeup.innerText = state.drawnCard.leadPersona,
+    selectors.fullCard.progressBar.style.width = state.drawnCard.startTrust + "%";
+    
+    console.log(state.drawnCard);
+    
     //Render Character name + Status ( A-D / Client )
+
     //Render Character Portrait
     //Render Character Persona
-    //Render Character Interest Level
+
+    //Render Character Trust Bar
+}
+
+function renderPlayerInteraction(){
+    //fills up the dialogue choice according to the current state.dialogueState
 }
 
 function renderStatusBar(){
@@ -130,8 +154,16 @@ function renderStatusBar(){
 
  }
 
- function drawLead(){
-    //to load dialogue state from card properties
+ function drawCard(){ //Draw card counts as 1 turn
+
+    //To draw a card from deck, will load a single demo card to complete the basic mechanics
+    state.drawnCard = deckData.cardDeck[0];
+    console.log(state.drawnCard);
+    //Remember to shift the cards in the cardDeck
+
+
+    console.log(state.drawnCard);
+    render();
  }
 
  function checkDialogueChoice(){
@@ -149,13 +181,6 @@ function checkEmpathyBar(){
 
 }
 
- function readInGameData() {
-    //To read in assets/gamedata/gamedata.json
-   
-
-
- }
-
  function playerInteraction() {
 
 
@@ -163,17 +188,12 @@ function checkEmpathyBar(){
 
 function gameTutorial(step){
     // Priorty low
-    // To return initial tutorial pages according to steps (to store this in json?)
+    // To return initial tutorial pages according to steps (to store this in gamedata.js)
 }
 
  function buildDialogueElements(){
     //To build dialogue elements from card prop
  }
-
-
-
-
-
 
 
 function advanceTurn(){
@@ -182,13 +202,10 @@ function advanceTurn(){
 }
 
 
-function loadDemoCard(){
-    
-}
-
 
 function runDemo(){
     //load demo card
+    drawCard();
 
 }
 
@@ -197,6 +214,7 @@ function initialise() {
     // console.log(deckData);
     clearDemoElements();
     addEventListeners();
+    
 
     runDemo();
 };

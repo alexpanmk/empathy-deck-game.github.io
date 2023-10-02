@@ -20,6 +20,7 @@ const jsonData =
       "profileImage": "assets/img/lady1.svg",
       "leadPersona": "Mrs. Lim is a 52-year-old school teacher in Singapore. She is approaching retirement and is concerned about her financial stability post-retirement. She is a mother of two and wishes to ensure a comfortable life for her family.",
       "category": "A",
+      "startTrust": 20,
       "scenario": "Mrs. Lim is your aunt's colleague and you met her during a family gathering. She overheard you speaking about insurance and is keen to explore her options.",
       "dialogChoices": {
         "A": [
