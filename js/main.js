@@ -120,7 +120,7 @@ function renderFullCard(){
     selectors.fullCard.progressBar.style.width = state.drawnCard.startTrust + "%";
     
     console.log(state.drawnCard);
-    
+
     //Render Character name + Status ( A-D / Client )
 
     //Render Character Portrait
@@ -142,7 +142,7 @@ function renderStatusBar(){
 }
 
 
- //Business Logic
+ //------Business Logic--------//
 
  function initBoard(){
     //To set board's initial state
@@ -158,11 +158,14 @@ function renderStatusBar(){
 
     //To draw a card from deck, will load a single demo card to complete the basic mechanics
     state.drawnCard = deckData.cardDeck[0];
-    console.log(state.drawnCard);
+    
+    //Load dialogue
+    
+    
+    
+    
     //Remember to shift the cards in the cardDeck
 
-
-    console.log(state.drawnCard);
     render();
  }
 
