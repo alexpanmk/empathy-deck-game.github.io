@@ -13,7 +13,7 @@ class leadClass extends cardClass {
     // dialogChoices: [Array of 10 opening dialogues from lead and choices for each dialogue]
     // trustLevel: [Starting trust level of the lead]
     
-    constructor(leadName, imagePath, writeUp, trustLevel, dialogueChoices){
+    constructor(leadName, imagePath, writeUp, category, trustLevel, dialogueChoices){
         
         super(leadName, imagePath, writeUp);
         this.cardType = "leadCard";
@@ -21,9 +21,18 @@ class leadClass extends cardClass {
         this.imagePath = imagePath;
         this.writeUp = writeUp;
 
+        this.category = category;
         this.trustLevel = trustLevel;
         this.dialogueChoices = dialogueChoices;
+        this.dialogueState = {
+            category: category,
+            dialogueIndex: 1,
+        }
+    }
 
+    advanceDialogue(){
+        //To advance the dialogue index by 1
+        this.dialogueState.dialogueIndex += 1;
     }
 
 

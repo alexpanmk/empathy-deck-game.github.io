@@ -29,7 +29,7 @@ class deckClass {
         deckData.cardDeck.forEach(card => {
             console.log(card.cardType);
             if(card.cardType==="leadCard"){
-                newDeck.push(new leadClass(card.leadName, card.profileImage, card.leadPersona, card.startTrust, card.dialogChoices));
+                newDeck.push(new leadClass(card.leadName, card.profileImage, card.leadPersona, card.category, card.startTrust, card.dialogChoices));
             } else {
                 //Other cards
             };
