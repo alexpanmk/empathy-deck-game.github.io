@@ -243,10 +243,13 @@ function checkConversion(){
 }
 
 function checkMaxTurn(){
-    if (state.turnCount >= state.maxTurn){
+    console.log(state.turnCount);
+    if (state.turnCount >= state.maxTurn-1){
         state.statusMessage = "You have failed to convert a prospect into a client!";
         state.statusBoxColor = "#E74C3C";
         state.endGame = true;
+        state.turnCount += 1;
+        renderStatusBar();
         return true;
     } else {
         return false;
