@@ -1,5 +1,5 @@
 import deckData from '../assets/gamedata/gamedata.js'
-import leadClass from './leadClass.js'
+import leadCard from './leadClass.js'
 
 class deckClass {
 
@@ -17,6 +17,7 @@ class deckClass {
     drawCard(){
         //Pick a random card from deck, return the value and send it to drawndeck
         //1st card for demo
+        // console.log(this.deck[0].dialogChoices.A[0].dialog);
         return this.deck[0];
 
     }
@@ -29,7 +30,7 @@ class deckClass {
         deckData.cardDeck.forEach(card => {
             console.log(card.cardType);
             if(card.cardType==="leadCard"){
-                newDeck.push(new leadClass(card.leadName, card.profileImage, card.leadPersona, card.category, card.startTrust, card.dialogChoices));
+                newDeck.push(new leadCard(card.leadName, card.profileImage, card.leadPersona, card.category, card.startTrust, card.dialogChoices));
             } else {
                 //Other cards
             };
@@ -37,7 +38,7 @@ class deckClass {
 
 
 
-        return deckData.cardDeck
+        return newDeck
 
     }
 

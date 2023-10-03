@@ -1,6 +1,6 @@
 import cardClass from "./cardClass.js"
 
-class leadClass extends cardClass {
+class leadCard extends cardClass {
 
     // Props
     // cardType: leadCard
@@ -13,7 +13,7 @@ class leadClass extends cardClass {
     // dialogChoices: [Array of 10 opening dialogues from lead and choices for each dialogue]
     // trustLevel: [Starting trust level of the lead]
     
-    constructor(leadName, imagePath, writeUp, category, trustLevel, dialogueChoices){
+    constructor(leadName, imagePath, writeUp, category, trustLevel, dialogChoices){
         
         super(leadName, imagePath, writeUp);
         this.cardType = "leadCard";
@@ -23,8 +23,8 @@ class leadClass extends cardClass {
 
         this.category = category;
         this.trustLevel = trustLevel;
-        this.dialogueChoices = dialogueChoices;
-        this.dialogueState = {
+        this.dialogChoices = dialogChoices;
+        this.dialogState = {
             category: category,
             dialogueIndex: 1,
         }
@@ -38,4 +38,4 @@ class leadClass extends cardClass {
 
 }
 
-export default leadClass;
+export default leadCard;

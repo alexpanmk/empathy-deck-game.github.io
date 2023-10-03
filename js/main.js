@@ -1,4 +1,5 @@
 import deckClass from './deckClass.js';
+import leadClass from './leadClass.js';
 
 /*----- constants -----*/
 
@@ -34,11 +35,15 @@ const selectors = {
         writeup: document.querySelector('.full-card .write-up p'),
         progressBar: document.querySelector('.progress-bar'),
     },
-
+    playerInteraction: {
+        dialogue: document.querySelector('.player-interaction .dialogue'),
+        choice1: document.getElementById('choice-1'),
+        choice2: document.getElementById('choice-2'),
+        choice3: document.getElementById('choice-3'),
+    },
     activeCards: document.querySelector('.active-cards'),
     cardTray: document.querySelector('.card-tray') ,
-    playerInteraction: document.querySelector('.player-interaction'),
-
+    
 };
 
  /*----- event listeners & functions-----*/
@@ -110,11 +115,11 @@ function renderClients(){
 
 function renderFullCard(){
 
-    
+
     //render state.drawnCard into elements
-    selectors.fullCard.name.innerText = state.displayCard.leadName;
-    selectors.fullCard.img.src = state.displayCard.profileImage;
-    selectors.fullCard.writeup.innerText = state.displayCard.leadPersona;
+    selectors.fullCard.name.innerText = state.displayCard.cardName;
+    selectors.fullCard.img.src = state.displayCard.imagePath;
+    selectors.fullCard.writeup.innerText = state.displayCard.writeUp;
 
     console.log(state.displayCard.cardType);
     
@@ -122,7 +127,7 @@ function renderFullCard(){
 
     if(state.displayCard.cardType==="leadCard"){
         // leadCard
-        selectors.fullCard.progressBar.style.width = state.displayCard.startTrust + "%";
+        selectors.fullCard.progressBar.style.width = state.displayCard.trustLevel + "%";
     } else {
         //Other cards
         selectors.fullCard.progressBar.style.width = "0px";
@@ -140,6 +145,15 @@ function renderFullCard(){
 
 function renderPlayerInteraction(){
     //fills up the dialogue choice according to the current state.dialogueState
+    console.log(state.displayCard);
+
+    let categoryIndex = state.displayCard.dialogState.category;
+    let dialogIndex = state.displayCard.dialogState.dialogueIndex - 1;
+
+    selectors.playerInteraction.dialogue.innerText = state.displayCard.dialogChoices.A[dialogIndex].dialog;
+    selectors.playerInteraction.choice1.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[0].text;
+    selectors.playerInteraction.choice2.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[1].text;
+    selectors.playerInteraction.choice3.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[2].text;
 }
 
 function renderStatusBar(){
@@ -167,10 +181,13 @@ function renderStatusBar(){
 
     //To draw a card from deck, will load a single demo card to complete the basic mechanics
     //state.drawnCard = deckData.cardDeck[0];
-    
+
+
     state.drawnCard = state.deck.drawCard();
     state.displayCard = state.drawnCard;
     
+    //console.log(state.displayCard.dialogChoices.A[0].dialog);
+    //console.log(state.displayCard.dialogueState.dialogueIndex);
     //Load dialogue
 
     
