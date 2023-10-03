@@ -22,6 +22,10 @@ const state = {
     currentDialogue: [],
     turnCount: 1,
     maxTurn: 10,
+    statusMessage: "Choose your response",
+    statusBoxColor: "#2C3E50",
+    endGame: false,
+
 }
 
  /*----- cached elements  -----*/
@@ -42,6 +46,8 @@ const selectors = {
         choice3: document.getElementById('choice-3'),
     },
     statusbar: document.querySelector('.status-bar h1'),
+    statusMessageBox: document.querySelector('.status-message'),
+    statusMessage: document.querySelector('.status-message h1'),
     activeCards: document.querySelector('.active-cards'),
     cardTray: document.querySelector('.card-tray') ,
     
@@ -62,7 +68,7 @@ const selectors = {
 function clickFunctions(id){
 
     // If dialogue choice is clicked
-    if(id.substring(0, 6)==="choice"){
+    if(id.substring(0, 6)==="choice" && state.endGame === false){
         console.log(id);
 
         let choiceIndex = parseInt(id.substring(7, 8));
@@ -167,6 +173,8 @@ function renderPlayerInteraction(){
 
 function renderStatusBar(){
     selectors.statusbar.innerText = "Turn " + state.turnCount + " / " + state.maxTurn;
+    selectors.statusMessage.innerText = state.statusMessage;
+    selectors.statusMessageBox.style.backgroundColor = state.statusBoxColor;
 }
 
 
@@ -207,25 +215,32 @@ function renderStatusBar(){
     //To add to player's empathy prop and card's trust prop accordingly
     const trustDisplacement = state.displayCard.dialogChoices.A[state.displayCard.dialogState.dialogIndex - 1].choices[selection].score;
 
+    if(trustDisplacement > 0){
+        state.statusMessage = "You gain trust!";
+        state.statusBoxColor = "#2ECC71";
+    } else {
+        state.statusMessage = "You lose trust!";
+        state.statusBoxColor = "#E74C3C";
+    }
+    
     state.displayCard.trustLevel += trustDisplacement;
 
+    //To check if card is converted
+   
 
  }
 
- function checkTrustBar(){
-    //to check after change in state
-
- }
-
-function checkEmpathyBar(){
-    //to check after change in state
-
+function checkConversion(){
+    if(state.displayCard.trustLevel >= 100){
+        state.statusMessage = "You have converted a prospect into a client!";
+        state.statusBoxColor = "#2ECC71";
+        state.endGame = true;
+    } else if (state.displayCard.trustLevel <= 0){
+        state.statusMessage = "You have lost a lead!";
+        state.statusBoxColor = "#E74C3C";
+        state.endGame = true;
+    }
 }
-
- function playerInteraction() {
-
-
- }
 
 function gameTutorial(step){
     // Priorty low
@@ -235,7 +250,6 @@ function gameTutorial(step){
  function buildDialogueElements(){
     //To build dialogue elements from card prop
  }
-
 
 function advanceTurn(){
     //For Demo
