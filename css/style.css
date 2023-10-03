@@ -281,3 +281,10 @@ body {
     width: 100%;
 }
 
+.status-bar > h1{
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+

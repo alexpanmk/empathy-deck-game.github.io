@@ -26,13 +26,13 @@ class leadCard extends cardClass {
         this.dialogChoices = dialogChoices;
         this.dialogState = {
             category: category,
-            dialogueIndex: 1,
+            dialogIndex: 1,
         }
     }
 
-    advanceDialogue(){
+    advanceDialog(){
         //To advance the dialogue index by 1
-        this.dialogueState.dialogueIndex += 1;
+        this.dialogState.dialogIndex += 1;
     }
 
 

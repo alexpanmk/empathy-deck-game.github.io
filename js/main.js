@@ -20,8 +20,8 @@ const state = {
     trustBarPlaceholder: 0,
     currentCardTurn: [], //To separate from main turn count due to nature of game mechanics
     currentDialogue: [],
-    turnCount: 0,
-    maxTurn: 11,
+    turnCount: 1,
+    maxTurn: 10,
 }
 
  /*----- cached elements  -----*/
@@ -41,6 +41,7 @@ const selectors = {
         choice2: document.getElementById('choice-2'),
         choice3: document.getElementById('choice-3'),
     },
+    statusbar: document.querySelector('.status-bar h1'),
     activeCards: document.querySelector('.active-cards'),
     cardTray: document.querySelector('.card-tray') ,
     
@@ -60,7 +61,11 @@ const selectors = {
 
 function clickFunctions(id){
 
-    console.log(id);
+    // If dialogue choice is clicked
+    if(id.substring(0, 6)==="choice"){
+        console.log(id);
+        advanceTurn();
+    };
 
  }
 
@@ -81,7 +86,7 @@ function render() {
     renderFullCard();
     // renderActiveCards();
     renderPlayerInteraction();
-    //renderStatusBar();
+    renderStatusBar();
 
 }
 
@@ -148,7 +153,7 @@ function renderPlayerInteraction(){
     console.log(state.displayCard);
 
     let categoryIndex = state.displayCard.dialogState.category;
-    let dialogIndex = state.displayCard.dialogState.dialogueIndex - 1;
+    let dialogIndex = state.displayCard.dialogState.dialogIndex - 1;
 
     selectors.playerInteraction.dialogue.innerText = state.displayCard.dialogChoices.A[dialogIndex].dialog;
     selectors.playerInteraction.choice1.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[0].text;
@@ -157,11 +162,7 @@ function renderPlayerInteraction(){
 }
 
 function renderStatusBar(){
-    //Render Player Empathy Level
-
-    //Render Converted Clients + total value
-
-    //Render Timer 
+    selectors.statusbar.innerText = "Turn " + state.turnCount + " / " + state.maxTurn;
 }
 
 
@@ -230,6 +231,10 @@ function gameTutorial(step){
 
 function advanceTurn(){
     //For Demo
+    state.turnCount += 1;
+    state.drawnCard.advanceDialog();
+
+    render();
 
 }
 
