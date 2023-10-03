@@ -64,6 +64,10 @@ function clickFunctions(id){
     // If dialogue choice is clicked
     if(id.substring(0, 6)==="choice"){
         console.log(id);
+
+        let choiceIndex = parseInt(id.substring(7, 8));
+        checkDialogueChoice(choiceIndex);
+
         advanceTurn();
     };
 
@@ -199,8 +203,12 @@ function renderStatusBar(){
     render();
  }
 
- function checkDialogueChoice(){
+ function checkDialogueChoice(selection){
     //To add to player's empathy prop and card's trust prop accordingly
+    const trustDisplacement = state.displayCard.dialogChoices.A[state.displayCard.dialogState.dialogIndex - 1].choices[selection].score;
+
+    state.displayCard.trustLevel += trustDisplacement;
+
 
  }
 
