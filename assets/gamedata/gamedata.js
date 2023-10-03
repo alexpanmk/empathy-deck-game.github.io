@@ -16,6 +16,7 @@ const jsonData =
   "cardDeck": [
     {
       "leadID": "SG_A_001",
+      "cardType": "leadCard",
       "leadName": "Mrs. Lim Hui Min",
       "profileImage": "assets/img/lady1.svg",
       "leadPersona": "Mrs. Lim is a 52-year-old school teacher in Singapore. She is approaching retirement and is concerned about her financial stability post-retirement. She is a mother of two and wishes to ensure a comfortable life for her family.",

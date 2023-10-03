@@ -1,8 +1,6 @@
-import deckData from '../assets/gamedata/gamedata.js'
+import deckClass from './deckClass.js';
 
 /*----- constants -----*/
-const demoCard = deckData[0]; 
-const demoCardDialogue = deckData.cardDeck[0].dialogChoices.A;
 
 // console.log(deckData);
 
@@ -15,7 +13,7 @@ const demoCardDialogue = deckData.cardDeck[0].dialogChoices.A;
 
 const state = {
     // player: new playerClass(),
-    deck: [],
+    deck: new deckClass(),
     displayCard: [], //displayCard can show other cards being hovered over
     drawnCard: [],
     trustBarPlaceholder: 0,
@@ -114,12 +112,23 @@ function renderFullCard(){
 
     
     //render state.drawnCard into elements
-    selectors.fullCard.name.innerText = state.drawnCard.leadName;
-    selectors.fullCard.img.src = state.drawnCard.profileImage;
-    selectors.fullCard.writeup.innerText = state.drawnCard.leadPersona,
-    selectors.fullCard.progressBar.style.width = state.drawnCard.startTrust + "%";
+    selectors.fullCard.name.innerText = state.displayCard.leadName;
+    selectors.fullCard.img.src = state.displayCard.profileImage;
+    selectors.fullCard.writeup.innerText = state.displayCard.leadPersona;
+
+    console.log(state.displayCard.cardType);
     
-    console.log(state.drawnCard);
+
+
+    if(state.displayCard.cardType==="leadCard"){
+        // leadCard
+        selectors.fullCard.progressBar.style.width = state.displayCard.startTrust + "%";
+    } else {
+        //Other cards
+        selectors.fullCard.progressBar.style.width = "0px";
+    };
+    
+    
 
     //Render Character name + Status ( A-D / Client )
 
@@ -157,10 +166,13 @@ function renderStatusBar(){
  function drawCard(){ //Draw card counts as 1 turn
 
     //To draw a card from deck, will load a single demo card to complete the basic mechanics
-    state.drawnCard = deckData.cardDeck[0];
+    //state.drawnCard = deckData.cardDeck[0];
+    
+    state.drawnCard = state.deck.drawCard();
+    state.displayCard = state.drawnCard;
     
     //Load dialogue
-    
+
     
     
     
@@ -221,8 +233,5 @@ function initialise() {
 
     runDemo();
 };
-
-
-
 
  initialise();
