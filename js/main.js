@@ -213,7 +213,7 @@ function renderStatusBar(){
 
  function checkDialogueChoice(selection){
     //To add to player's empathy prop and card's trust prop accordingly
-    const trustDisplacement = state.displayCard.dialogChoices.A[state.displayCard.dialogState.dialogIndex - 1].choices[selection].score;
+    const trustDisplacement = state.displayCard.dialogChoices.A[state.displayCard.dialogState.dialogIndex - 1].choices[selection-1].score;
 
     if(trustDisplacement > 0){
         state.statusMessage = "You gain trust!";
@@ -226,20 +226,31 @@ function renderStatusBar(){
     state.displayCard.trustLevel += trustDisplacement;
 
     //To check if card is converted
-   
+   checkConversion();
 
  }
 
 function checkConversion(){
     if(state.displayCard.trustLevel >= 100){
-        state.statusMessage = "You have converted a prospect into a client!";
+        state.statusMessage = "You have converted a prospect into a client! Game Ends";
         state.statusBoxColor = "#2ECC71";
         state.endGame = true;
     } else if (state.displayCard.trustLevel <= 0){
-        state.statusMessage = "You have lost a lead!";
+        state.statusMessage = "You have lost a lead! Game Ends";
         state.statusBoxColor = "#E74C3C";
         state.endGame = true;
     }
+}
+
+function checkMaxTurn(){
+    if (state.turnCount >= state.maxTurn){
+        state.statusMessage = "You have failed to convert a prospect into a client!";
+        state.statusBoxColor = "#E74C3C";
+        state.endGame = true;
+        return true;
+    } else {
+        return false;
+    };
 }
 
 function gameTutorial(step){
@@ -253,9 +264,12 @@ function gameTutorial(step){
 
 function advanceTurn(){
     //For Demo
-    state.turnCount += 1;
-    state.drawnCard.advanceDialog();
-
+    if (checkMaxTurn() === true){
+        return;
+    } else {
+        state.turnCount += 1;
+        state.drawnCard.advanceDialog();
+    }
     render();
 
 }
