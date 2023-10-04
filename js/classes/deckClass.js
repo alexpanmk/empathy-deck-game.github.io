@@ -10,6 +10,7 @@ class deckClass {
     constructor(){
         
         this.deck = this.initDeck();
+        this.cardCount = 0;
 
         // this.demoCard = deckData[0]; 
     }
@@ -31,6 +32,7 @@ class deckClass {
             console.log(card.cardType);
             if(card.cardType==="leadCard"){
                 newDeck.push(new leadCard(card.leadName, card.profileImage, card.leadPersona, card.category, card.startTrust, card.dialogChoices));
+                this.cardCount += 1;
             } else {
                 //Other cards
             };
