@@ -1,4 +1,4 @@
-import deckData from '../assets/gamedata/gamedata.js'
+import deckData from '../../assets/gamedata/gamedata.js'
 import leadCard from './leadClass.js'
 
 class deckClass {

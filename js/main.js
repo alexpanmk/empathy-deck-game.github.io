@@ -1,5 +1,5 @@
 //Classes
-import deckClass from './deckClass.js';
+import deckClass from './classes/deckClass.js';
 
 /*----- constants -----*/
 
