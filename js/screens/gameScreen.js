@@ -1,7 +1,7 @@
 class gameScreen {
     constructor(){
         this.template = this.getTemplate();
-        this.selectors = this.getSelectors();
+        this.selectors = this.initSelectors();
         console.log("Test");
     }
 
@@ -59,7 +59,7 @@ class gameScreen {
         `
     }
 
-    getSelectors(){
+    initSelectors(){
         return {
             mainDiv: document.getElementById('main'),
             fullCard: {
@@ -80,6 +80,51 @@ class gameScreen {
             activeCards: document.querySelector('.active-cards'),
             cardTray: document.querySelector('.card-tray') ,
         }
+
+    }
+
+    update(state){
+        //receive state from parent to update the dom with the render functions specific to this screen
+        this.selectors = this.initSelectors();
+        this.renderFullCard(state);
+        this.renderPlayerInteraction(state);
+        this.renderStatusBar(state);
+    }
+
+    renderFullCard(state){
+
+        //render state.drawnCard into elements
+        this.selectors.fullCard.name.innerText = state.displayCard.cardName;
+        this.selectors.fullCard.img.src = state.displayCard.imagePath;
+        this. selectors.fullCard.writeup.innerText = state.displayCard.writeUp;
+    
+        if(state.displayCard.cardType==="leadCard"){
+            // leadCard
+            this.selectors.fullCard.progressBar.style.width = state.displayCard.trustLevel + "%";
+        } else {
+            //Other cards
+            this.selectors.fullCard.progressBar.style.width = "0px";
+        };
+        
+    }
+
+    renderPlayerInteraction(state){
+        //fills up the dialogue choice according to the current state.dialogueState
+        //console.log(state.displayCard);
+    
+        let categoryIndex = state.displayCard.dialogState.category;
+        let dialogIndex = state.displayCard.dialogState.dialogIndex - 1;
+    
+        this.selectors.playerInteraction.dialogue.innerText = state.displayCard.dialogChoices.A[dialogIndex].dialog;
+        this.selectors.playerInteraction.choice1.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[0].text;
+        this.selectors.playerInteraction.choice2.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[1].text;
+        this.selectors.playerInteraction.choice3.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[2].text;
+    }
+    
+    renderStatusBar(state){
+        this.selectors.statusbar.innerText = "Turn " + state.turnCount + " / " + state.maxTurn;
+        this.selectors.statusMessage.innerText = state.statusMessage;
+        this.selectors.statusMessageBox.style.backgroundColor = state.statusBoxColor;
     }
 
     show(target){

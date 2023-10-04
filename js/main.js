@@ -10,6 +10,10 @@ import gameScreen from './screens/gameScreen.js';
 
  /*----- state variables -----*/
 
+const appScreens = {
+    gameScreen: new gameScreen(),
+}
+
 const state = {
     // player: new playerClass(),
     deck: new deckClass(),
@@ -23,11 +27,19 @@ const state = {
     statusMessage: "Choose your response",
     statusBoxColor: "#2C3E50",
     endGame: false,
+    activeScreen: "",
 
 }
 
  /*----- cached elements  -----*/
-const selectors = {
+
+const gs = new gameScreen();
+
+const gameScreenHTML = gs.template;
+document.getElementById('main').innerHTML = "";
+document.getElementById('main').innerHTML = gs.template;
+
+let selectors = {
     mainDiv: document.getElementById('main'),
 
     //full-card selectors
@@ -51,6 +63,10 @@ const selectors = {
     
 };
 
+document.getElementById('main').innerHTML = "";
+document.getElementById('main').innerHTML = gs.template;
+selectors = gs.initSelectors();
+
  /*----- event listeners & functions-----*/
  
  //hover on card tray area to review full card
@@ -67,112 +83,23 @@ function clickFunctions(id){
 
     // If dialogue choice is clicked
     if(id.substring(0, 6)==="choice" && state.endGame === false){
-        console.log(id);
 
+        console.log(id);
         let choiceIndex = parseInt(id.substring(7, 8));
         checkDialogueChoice(choiceIndex);
-
         advanceTurn();
     };
 
  }
-
-//  function hoverFunctions(id, type){
-    
-//  }
-
-//timer for game progression
  
 /*----- functions -----*/
 
  //Render Functions
 function render() {
-    renderDeck();
-    renderProspects();
-    renderClients();
 
-    renderFullCard();
-    // renderActiveCards();
-    renderPlayerInteraction();
-    renderStatusBar();
+    //Updates state of currentScreen of active 
+    appScreens[state.activeScreen].update(state);
 
-}
-
-function clearDemoElements(){
-
-    // // Collect the required elements into variable for iteration
-    // let elements = [
-    //     ...Array.from(selectors.fullCard.children),
-    //     ...Array.from(selectors.playerInteraction.children)
-    // ];
-
-    // elements.forEach(element => {
-    //     element.innerText="";
-    // });
-
-}
-
-function renderDeck(){
-    //render deck to represent fixed number of cards overlapping each other
-
-}
-
-function renderProspects(){
-    //render current leads, to declare in state
-}
-
-function renderClients(){
-    //render converted clients, to declare in state
-
-}
-
-function renderFullCard(){
-
-
-    //render state.drawnCard into elements
-    selectors.fullCard.name.innerText = state.displayCard.cardName;
-    selectors.fullCard.img.src = state.displayCard.imagePath;
-    selectors.fullCard.writeup.innerText = state.displayCard.writeUp;
-
-    console.log(state.displayCard.cardType);
-    
-
-
-    if(state.displayCard.cardType==="leadCard"){
-        // leadCard
-        selectors.fullCard.progressBar.style.width = state.displayCard.trustLevel + "%";
-    } else {
-        //Other cards
-        selectors.fullCard.progressBar.style.width = "0px";
-    };
-    
-    
-
-    //Render Character name + Status ( A-D / Client )
-
-    //Render Character Portrait
-    //Render Character Persona
-
-    //Render Character Trust Bar
-}
-
-function renderPlayerInteraction(){
-    //fills up the dialogue choice according to the current state.dialogueState
-    console.log(state.displayCard);
-
-    let categoryIndex = state.displayCard.dialogState.category;
-    let dialogIndex = state.displayCard.dialogState.dialogIndex - 1;
-
-    selectors.playerInteraction.dialogue.innerText = state.displayCard.dialogChoices.A[dialogIndex].dialog;
-    selectors.playerInteraction.choice1.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[0].text;
-    selectors.playerInteraction.choice2.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[1].text;
-    selectors.playerInteraction.choice3.innerText = state.displayCard.dialogChoices.A[dialogIndex].choices[2].text;
-}
-
-function renderStatusBar(){
-    selectors.statusbar.innerText = "Turn " + state.turnCount + " / " + state.maxTurn;
-    selectors.statusMessage.innerText = state.statusMessage;
-    selectors.statusMessageBox.style.backgroundColor = state.statusBoxColor;
 }
 
 
@@ -193,21 +120,12 @@ function renderStatusBar(){
     //To draw a card from deck, will load a single demo card to complete the basic mechanics
     //state.drawnCard = deckData.cardDeck[0];
 
-
     state.drawnCard = state.deck.drawCard();
     state.displayCard = state.drawnCard;
     
     state.turnCount += 1;
     state.statusMessage = "Drawn Card - 1 Turn Spent"
 
-    
-    //console.log(state.displayCard.dialogChoices.A[0].dialog);
-    //console.log(state.displayCard.dialogueState.dialogueIndex);
-    //Load dialogue
-
-    
-    
-    
     //Remember to shift the cards in the cardDeck
 
     render();
@@ -251,7 +169,7 @@ function checkMaxTurn(){
         state.statusBoxColor = "#E74C3C";
         state.endGame = true;
         state.turnCount += 1;
-        gitrender();
+        render();
         return true;
     } else {
         return false;
@@ -280,21 +198,11 @@ function advanceTurn(){
 }
 
 
-
-function runDemo(){
-    //load demo card
-    drawCard();
-
-}
-
-
 function initialise() {
-    // console.log(deckData);
-    clearDemoElements();
-    addEventListeners();
-    
 
-    runDemo();
+    addEventListeners();
+    state.activeScreen = "gameScreen";
+    drawCard(); //eventually to have drawcard button for first draw
 };
 
  initialise();
