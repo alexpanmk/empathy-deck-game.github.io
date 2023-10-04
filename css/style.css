@@ -25,6 +25,8 @@ body {
     background-color: #E7E7E5;
     border-radius: 20px;
 
+
+
 }
 
 .game-title {
@@ -66,7 +68,7 @@ body {
     grid-column: 1 / 4;
     grid-row: 3 / 4;
     height: 100%;
-    background-color: #2C3E50;
+    /* background-color: #2C3E50; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -202,10 +204,14 @@ body {
     box-sizing: border-box;
 
     text-align: center;
-    background-color:#2e2e2e;
+    background-color:#3a3a3a;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
    
+}
+
+.write-up p{
+    /* color:#333333; */
 }
 
 .trust-bar{
@@ -303,7 +309,7 @@ body {
 }
 
 .dialogue-choices .choice{
-    height: 100px;
+    height: 115px;
     width: 100%;
     background-color: #009EC0;
     padding: 20px;
@@ -313,7 +319,7 @@ body {
 }
 
 .dialogue-choices .choice-alt{
-    height: 100px;
+    height: 115px;
     width: 100%;
     background-color: #36acc7;
     padding: 20px;
@@ -321,9 +327,21 @@ body {
     font-size: 22px;
 }
 
+.choice:hover {
+    background-color: #b9b9b9;
+    cursor: pointer;
+}
+
+.choice-alt:hover {
+    background-color: #b9b9b9;
+    cursor: pointer;
+}
+
 .buttons {
-    height: 100px;
     width: 100%;
+    background-color: #1976D2;
+
+    display: flex;
 }
 
 .status-bar {
@@ -334,7 +352,7 @@ body {
 
 .turn-counter {
     height: 100%;
-    width: 30%;
+    width: 15%;
     padding-left: 40px;
     padding-right: 40px;
     
@@ -346,14 +364,14 @@ body {
 .turn-counter > h1{
     line-height: 100%;
     font-size: 25px;
-    color: rgb(255, 255, 255);
+    color: rgb(87, 87, 87);
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
 
 .status-message {
     height: 100%;
-    width: 70%;
+    width: 85%;
     /* background-color: #0b4076; */
     display: flex;
     justify-content: center;
@@ -367,4 +385,52 @@ body {
     color: rgb(255, 255, 255);
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+}
+
+
+
+/* endScreen CSS */
+.end-screen {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+
+    display: grid;
+    place-items: center;
+    align-content: center;
+
+}
+
+.end-screen h1{
+    font-size: 25px;
+    color: rgb(87, 87, 87);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.end-screen img{
+    margin-top: 50px;
+    max-height: 300px;
+}
+
+.reset-game-btn {
+    margin-top: 50px;
+    height: 50px;
+    width: 250px;
+    background-color: #FF0021;
+    border-radius: 20px;
+
+    align-items: center;
+    text-align: center;
+    padding-top: 25px;
+
+    font-size: 20px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+
+}
+
+.reset-game-btn:hover {
+    background-color: #ff7c8e;
+    cursor: pointer;
 }

@@ -4,6 +4,7 @@ import deckClass from './classes/deckClass.js';
 //Screens 
 import gameScreen from './screens/gameScreen.js';
 import openScreen from './screens/openScreen.js';
+import endScreen from './screens/endScreen.js';
 
 /*----- constants -----*/
 
@@ -14,6 +15,7 @@ import openScreen from './screens/openScreen.js';
 const appScreens = {
     openScreen: new openScreen(),
     gameScreen: new gameScreen(),
+    endScreen: new endScreen(),
 }
 
 const state = {
@@ -28,8 +30,12 @@ const state = {
     maxTurn: 11,
     statusMessage: "Choose your response",
     statusBoxColor: "#2C3E50",
-    endGame: false,
     activeScreen: "",
+
+    //endScreen
+    endGame: "", //"win" or "lose"
+    endScreenMessage: "",
+
 }
 
  /*----- cached elements  -----*/
@@ -64,28 +70,29 @@ let selectors = {
     
 };
 
-document.getElementById('main').innerHTML = "";
-document.getElementById('main').innerHTML = gs.template;
-selectors = gs.initSelectors();
-
  /*----- event listeners & functions-----*/
  
  //Full card should show current lead focus by default
  function addEventListeners(){
     
-    selectors.mainDiv.addEventListener('click', evt => {clickFunctions(evt.target.id)});
+    appScreens.gameScreen.selectors.mainDiv.addEventListener('click', evt => {clickFunctions(evt.target.id)});
+    //appScreens.endScreen.selectors.mainDiv.addEventListener('click', evt => {clickFunctions(evt.target.id)});
         
  }
 
 function clickFunctions(id){
-
+    console.log(id);
     // If dialogue choice is clicked
-    if(id.substring(0, 6)==="choice" && state.endGame === false){
+    if(id.substring(0, 6)==="choice" && state.endGame === ""){
 
         console.log(id);
         let choiceIndex = parseInt(id.substring(7, 8));
         checkDialogueChoice(choiceIndex);
         advanceTurn();
+    } else if (id === "reset"){
+
+        resetGame();
+
     };
 
  }
@@ -96,6 +103,7 @@ function clickFunctions(id){
 function render() {
 
     //Updates state of currentScreen of activeScreen in state
+    appScreens[state.activeScreen].show(selectors.mainDiv);
     appScreens[state.activeScreen].update(state);
 
 }
@@ -151,12 +159,20 @@ function render() {
 function checkConversion(){
     if(state.displayCard.trustLevel >= 100){
         state.statusMessage = "You have converted a prospect into a client! Game Ends";
+        state.endScreenMessage = "You have converted a prospect into a client! Game Ends";
+
         state.statusBoxColor = "#2ECC71";
-        state.endGame = true;
+
+        state.endGame = "win";
+        state.activeScreen = "endScreen";
+
     } else if (state.displayCard.trustLevel <= 0){
-        state.statusMessage = "You have lost a lead! Game Ends";
+        state.statusMessage = "You have lost a prospect!  Game Ends";
+        state.endScreenMessage = `You have lost a prospect! Game Ends`;
+
         state.statusBoxColor = "#E74C3C";
-        state.endGame = true;
+        state.endGame = "lose";
+        state.activeScreen = "endScreen";
     }
 }
 
@@ -165,7 +181,7 @@ function checkMaxTurn(){
     if (state.turnCount >= state.maxTurn-1){
         state.statusMessage = "Turns up! You have failed to convert a prospect into a client!";
         state.statusBoxColor = "#E74C3C";
-        state.endGame = true;
+        state.endGame = "lose";
         state.turnCount += 1;
         render();
         return true;
@@ -193,6 +209,27 @@ function advanceTurn(){
     }
     render();
 
+}
+
+function resetGame(){
+    
+    //To reset game state
+    state.activeScreen = "gameScreen";
+    state.endGame = "";
+    state.turnCount = 1;
+    state.deck = new deckClass();
+    state.displayCard = [];
+    state.drawnCard = [];
+    state.trustBarPlaceholder = 0;
+    state.currentCardTurn = [];
+    state.currentDialogue = [];
+    state.statusMessage = "Choose your response";
+    state.statusBoxColor = "#2C3E50";
+    state.endScreenMessage = "";
+    state.statusMessage = "Choose your response";
+    state.statusBoxColor = "#2C3E50";
+
+    drawCard();
 }
 
 
