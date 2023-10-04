@@ -212,7 +212,7 @@ function advanceTurn(){
 }
 
 function resetGame(){
-    
+
     //To reset game state
     state.activeScreen = "gameScreen";
     state.endGame = "";
@@ -236,7 +236,7 @@ function resetGame(){
 function initialise() {
 
     addEventListeners();
-    state.activeScreen = "gameScreen";
+    state.activeScreen = "openScreen";
     drawCard(); //eventually to have drawcard button for first draw
 };
 
