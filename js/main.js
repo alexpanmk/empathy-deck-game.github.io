@@ -3,6 +3,7 @@ import deckClass from './classes/deckClass.js';
 
 //Screens 
 import gameScreen from './screens/gameScreen.js';
+import openScreen from './screens/openScreen.js';
 
 /*----- constants -----*/
 
@@ -11,6 +12,7 @@ import gameScreen from './screens/gameScreen.js';
  /*----- state variables -----*/
 
 const appScreens = {
+    openScreen: new openScreen(),
     gameScreen: new gameScreen(),
 }
 
@@ -28,7 +30,6 @@ const state = {
     statusBoxColor: "#2C3E50",
     endGame: false,
     activeScreen: "",
-
 }
 
  /*----- cached elements  -----*/
@@ -69,13 +70,10 @@ selectors = gs.initSelectors();
 
  /*----- event listeners & functions-----*/
  
- //hover on card tray area to review full card
- //(full card should show current lead focus by default)
+ //Full card should show current lead focus by default
  function addEventListeners(){
+    
     selectors.mainDiv.addEventListener('click', evt => {clickFunctions(evt.target.id)});
-    // selectors.mainDiv.addEventListener('click', evt => {clickFunctions(evt.target.id)});
-    // selectors.mainDiv.addEventListener('mouseover', evt => {hoverFunctions(evt.target.id, 'mouseover')});
-    // selectors.mainDiv.addEventListener('mouseout', evt => {hoverFunctions(evt.target.id, 'mouseout')});
         
  }
 
@@ -97,7 +95,7 @@ function clickFunctions(id){
  //Render Functions
 function render() {
 
-    //Updates state of currentScreen of active 
+    //Updates state of currentScreen of activeScreen in state
     appScreens[state.activeScreen].update(state);
 
 }

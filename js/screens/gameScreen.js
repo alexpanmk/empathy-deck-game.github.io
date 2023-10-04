@@ -2,7 +2,6 @@ class gameScreen {
     constructor(){
         this.template = this.getTemplate();
         this.selectors = this.initSelectors();
-        console.log("Test");
     }
 
     getTemplate(){
@@ -34,6 +33,7 @@ class gameScreen {
                                 <div class="write-up"><p></p></div>
                                 <div class="trust-bar">
                                     <div class="progress-bar"></div>
+                                    <div class="trust-text">TRUST BAR</div>
                                 </div>
                             </div>
                         </div>
