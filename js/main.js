@@ -1,16 +1,11 @@
+//Classes
 import deckClass from './deckClass.js';
-import leadClass from './leadClass.js';
 
 /*----- constants -----*/
 
 // console.log(deckData);
 
  /*----- state variables -----*/
-// const state = {
-//     //player = new playerClass(),
-//     activeLead = [],
-//     trustBar = 0,
-// }
 
 const state = {
     // player: new playerClass(),
@@ -21,7 +16,7 @@ const state = {
     currentCardTurn: [], //To separate from main turn count due to nature of game mechanics
     currentDialogue: [],
     turnCount: 1,
-    maxTurn: 10,
+    maxTurn: 11,
     statusMessage: "Choose your response",
     statusBoxColor: "#2C3E50",
     endGame: false,
@@ -199,6 +194,10 @@ function renderStatusBar(){
     state.drawnCard = state.deck.drawCard();
     state.displayCard = state.drawnCard;
     
+    state.turnCount += 1;
+    state.statusMessage = "Drawn Card - 1 Turn Spent"
+
+    
     //console.log(state.displayCard.dialogChoices.A[0].dialog);
     //console.log(state.displayCard.dialogueState.dialogueIndex);
     //Load dialogue
@@ -249,7 +248,7 @@ function checkMaxTurn(){
         state.statusBoxColor = "#E74C3C";
         state.endGame = true;
         state.turnCount += 1;
-        render();
+        gitrender();
         return true;
     } else {
         return false;
