@@ -1,6 +1,9 @@
 //Classes
 import deckClass from './classes/deckClass.js';
 
+//Screens 
+import gameScreen from './screens/gameScreen.js';
+
 /*----- constants -----*/
 
 // console.log(deckData);
