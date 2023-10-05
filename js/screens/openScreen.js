@@ -8,7 +8,7 @@ class openScreen {
         return `
             <div class="open-screen">
                 <img></img>
-                <div class="reset-game-btn" id="reset">START GAME</div>
+                <div class="start-game-btn" id="reset">START GAME</div>
             </div>
         `
     }
