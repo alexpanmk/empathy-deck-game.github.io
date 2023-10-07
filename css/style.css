@@ -6,7 +6,6 @@ html {
 body {
 
     color: white;
-
     display: flex;
     justify-content:center;
     align-items: center;
@@ -18,14 +17,10 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 70px 1fr 70px;
-    /* grid-gap: 40px; */
-
     min-height: 720px;
     width: 1280px;
     background-color: #E7E7E5;
     border-radius: 20px;
-
-
 
 }
 
@@ -33,7 +28,6 @@ body {
     grid-column: 1 / 4;
     grid-row: 1 / 2;
     height: 100%;
-    /* background-color: #E7E7E5; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +48,6 @@ body {
     /* Start new grid */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
     justify-content: center;
     align-items: center;
 }
@@ -68,7 +61,6 @@ body {
     grid-column: 1 / 4;
     grid-row: 3 / 4;
     height: 100%;
-    /* background-color: #2C3E50; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -211,7 +203,7 @@ body {
 }
 
 .write-up p{
-    /* color:#333333; */
+    
 }
 
 .trust-bar{
@@ -285,8 +277,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
 }
 
 .dialogue {
@@ -340,7 +330,6 @@ body {
 .buttons {
     width: 100%;
     background-color: #1976D2;
-
     display: flex;
 }
 
@@ -372,7 +361,6 @@ body {
 .status-message {
     height: 100%;
     width: 85%;
-    /* background-color: #0b4076; */
     display: flex;
     justify-content: center;
     align-items: center;

@@ -8,15 +8,13 @@ import endScreen from './screens/endScreen.js';
 
 /*----- constants -----*/
 
-// console.log(deckData);
-
- /*----- state variables -----*/
-
 const appScreens = {
     openScreen: new openScreen(),
     gameScreen: new gameScreen(),
     endScreen: new endScreen(),
 }
+
+ /*----- state variables -----*/
 
 const state = {
     // player: new playerClass(),
@@ -111,16 +109,6 @@ function render() {
 
  //------Business Logic--------//
 
- function initBoard(){
-    //To set board's initial state
-    //To set initial game greetings, tutorial and dialogue to player in interaction box
- }
-
- function initGame(){
-    //init player state
-
- }
-
  function drawCard(){ //Draw card counts as 1 turn
 
     //To draw a card from deck, will load a single demo card to complete the basic mechanics
@@ -195,10 +183,6 @@ function gameTutorial(step){
     // To return initial tutorial pages according to steps (to store this in gamedata.js)
 }
 
- function buildDialogueElements(){
-    //To build dialogue elements from card prop
- }
-
 function advanceTurn(){
     //For Demo
     if (checkMaxTurn() === true){
@@ -208,7 +192,6 @@ function advanceTurn(){
         state.drawnCard.advanceDialog();
     }
     render();
-
 }
 
 function resetGame(){

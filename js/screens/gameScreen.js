@@ -45,7 +45,11 @@ class gameScreen {
                             <div class="choice-alt" id="choice-2"></div>
                             <div class="choice" id="choice-3"></div>
                         </div>
-                        <div class="buttons"></div>
+                        <div class="buttons">
+                            <div class="draw-card-btn"></div>
+                            <div class="use-power-card-btn"></div>
+
+                        </div>
                     </div>   
             </div>
             <div class="status-bar">

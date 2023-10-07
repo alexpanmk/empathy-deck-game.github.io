@@ -37,9 +37,7 @@ class endScreen {
             this.selectors.endImage.src = "assets/img/trophy.svg";
         } else {
             this.selectors.endImage.src = "assets/img/need-a-job.svg";
-        }
-
-        
+        }  
     }
 
     show(target){
