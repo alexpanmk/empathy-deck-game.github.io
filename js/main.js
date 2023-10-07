@@ -103,7 +103,7 @@ function render() {
     //Updates state of currentScreen of activeScreen in state
     appScreens[state.activeScreen].show(selectors.mainDiv);
     appScreens[state.activeScreen].update(state);
-
+    
 }
 
 
