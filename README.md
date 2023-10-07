@@ -1,6 +1,6 @@
 # The Empathy Deck: Insurance Agents
 
-![Alt text](./screenshots/img/open.png)
+![Alt text](./screenshots/open.png)
 
 Welcome to The Empathy Deck: Insurance Agents, a browser-based card game designed to immerse players in the world of insurance agents. With every draw from the deck, players are given the chance to understand, empathize, and connect with diverse leads. Will you secure the trust of your leads, or will you lose them with a wrong choice? Dive in and let your empathy guide the way!
 
